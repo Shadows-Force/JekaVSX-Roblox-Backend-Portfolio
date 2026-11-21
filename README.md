@@ -26,13 +26,13 @@ src/
     └── Shop/Item.luau
 ```
 
-Los módulos se han separado según la estructura de Roblox que compartí. El proyecto también utiliza dependencias propias o externas (`.cealshell`, `PlayerState` y `cryptography`) que no están incluidas aquí; por eso este repositorio no es un proyecto independiente listo para ejecutar.
+Los módulos se han separado según la estructura de Roblox que compartí. El proyecto también utiliza dependencias propias o externas (`PlayerState` y `rbx-cryptography`) que no están incluidas aquí; por eso este repositorio no es un proyecto independiente listo para ejecutar.
 
 ## Evidencia y estado
 
 El código fuente de cada módulo está disponible en `src/`. La place se utiliza para pruebas de desarrollo. Por ahora no incluyo tests automatizados, métricas, capturas ni un vídeo de demostración, así que no presento estos sistemas como producción ni como sistemas ya validados a escala.
 
-El sistema **Shop** y la creación/validación de objetos tienen detalles pendientes de revisión. Los he dejado visibles en el código y documentados en [`docs/REVISION_TECNICA.md`](docs/REVISION_TECNICA.md). La plantilla [`docs/PRUEBAS_PENDIENTES.md`](docs/PRUEBAS_PENDIENTES.md) es para registrar pruebas reales cuando las ejecute.
+[`docs/REVISION_TECNICA.md`](docs/REVISION_TECNICA.md). [`docs/PRUEBAS_PENDIENTES.md`](docs/PRUEBAS_PENDIENTES.md) 
 
 ## Próximos sistemas
 
