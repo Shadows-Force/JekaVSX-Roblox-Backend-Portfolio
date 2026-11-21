@@ -36,8 +36,6 @@ El sistema **Shop** y la creación/validación de objetos tienen detalles pendie
 
 ## Próximos sistemas
 
-Espacio reservado para añadir nuevos módulos cuando estén implementados y documentados.
-
 - [ ] Sistema nuevo: pendiente
 - [ ] Sistema nuevo: pendiente
 - [ ] Sistema nuevo: pendiente
