@@ -12,11 +12,11 @@ local function updateInventory(plr, method: Methods, item, data)
 		PlayerState[method](plr, `inventory.type.{item.type}.{item.key}`, data)
 		PlayerState[method](plr, `inventory.rarity.{item.display.rarity}.{item.key}`, data)
 	end)
-
+	
 	if not ok then
 		warn(`[Inventory] Error updating inventory: {err}`)
 	end
-
+	
 	return ok
 end
 
@@ -28,12 +28,23 @@ end
 
 function module.add(plr, itemData)
 	local path = string.format("inventory.index.%s", itemData.key)
-	local data = PlayerState.GetPath(plr, path)
-	if data then
-		warn("Item already exists")
-		return
+	
+	if PlayerState.GetPath(plr, path) then
+		if itemData.config.isMutable then
+			warn("Item already exists")
+			return false
+		else
+			PlayerState.Increment(plr, `{path}.amount`, 1)
+			return true
+		end
 	end
-	return updateInventory(plr, "SetPath", itemData, itemData)
+	
+	if not updateInventory(plr, "SetPath", itemData, itemData) then
+		updateInventory(plr, "SetPath", itemData, nil)
+		return false
+	end
+	
+	return true
 end
 
 function module.remove(plr, key)
@@ -41,15 +52,16 @@ function module.remove(plr, key)
 end
 
 function module.decrease(plr, key, amount)
+	amount = amount > 0 and amount or 1
 	local path = string.format("inventory.index.%s", key)
 	local itemData = PlayerState.GetPath(plr, path)
 	if not itemData then return end
-
+	
 	if itemData.amount - amount <= 0 then
-		clean(plr, key)
+		updateInventory(plr, "SetPath", itemData, nil)
 		return
 	end
-
+	
 	PlayerState.Decrement(plr, `{path}.amount`, amount)
 end
 
