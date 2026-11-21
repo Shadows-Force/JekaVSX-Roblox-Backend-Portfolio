@@ -32,11 +32,9 @@ Los módulos se han separado según la estructura de Roblox que compartí. El pr
 
 El código fuente de cada módulo está disponible en `src/`. La place se utiliza para pruebas de desarrollo. Por ahora no incluyo tests automatizados, métricas, capturas ni un vídeo de demostración, así que no presento estos sistemas como producción ni como sistemas ya validados a escala.
 
-El sistema **Shop** y la creación/validación de objetos tienen detalles pendientes de revisión. Los he dejado visibles en el código y documentados en [`docs/REVISION_TECNICA.md`](docs/REVISION_TECNICA.md). La plantilla [`docs/PRUEBAS_PENDIENTES.md`](docs/PRUEBAS_PENDIENTES.md) deja espacio para registrar pruebas reales cuando las ejecutes.
+El sistema **Shop** y la creación/validación de objetos tienen detalles pendientes de revisión. Los he dejado visibles en el código y documentados en [`docs/REVISION_TECNICA.md`](docs/REVISION_TECNICA.md). La plantilla [`docs/PRUEBAS_PENDIENTES.md`](docs/PRUEBAS_PENDIENTES.md) es para registrar pruebas reales cuando las ejecute.
 
 ## Próximos sistemas
-
-Espacio reservado para añadir nuevos módulos cuando estén implementados y documentados.
 
 - [ ] Sistema nuevo: pendiente
 - [ ] Sistema nuevo: pendiente
