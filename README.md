@@ -36,9 +36,9 @@ El código fuente de cada módulo está disponible en `src/`. La place se utiliz
 
 ## Próximos sistemas
 
-- [ ] Sistema nuevo: pendiente
-- [ ] Sistema nuevo: pendiente
-- [ ] Sistema nuevo: pendiente
+- [ ] Sistema de Progresion: pendiente
+- [ ] Sistema de Matchmaking: pendiente
+- [ ] Sistema de Server Infrastructure: pendiente
 
 ## Contacto
 
