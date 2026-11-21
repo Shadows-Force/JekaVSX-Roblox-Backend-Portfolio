@@ -26,7 +26,7 @@ src/
     └── Shop/Item.luau
 ```
 
-Los módulos se han separado según la estructura de Roblox que compartí. El proyecto también utiliza dependencias propias o externas (`PlayerState` y `rbx-cryptography`) que no están incluidas aquí; por eso este repositorio no es un proyecto independiente listo para ejecutar.
+Los módulos se han separado según la estructura de Roblox que compartí. El proyecto también utiliza dependencias propias o externas ([PlayerState](https://playerstate.netlify.app/) y [rbx-cryptography](https://github.com/daily3014/rbx-cryptography)) que no están incluidas aquí; por eso este repositorio no es un proyecto independiente listo para ejecutar.
 
 ## Evidencia y estado
 
