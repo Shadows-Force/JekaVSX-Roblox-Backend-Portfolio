@@ -22,7 +22,7 @@ local function getItemPrice(itemId: string)
 	return data.price
 end
 
-function module.buy(plr, itemId)
+function module.Buy(plr, itemId)
 	local itemPrices = getItemPrice(itemId)
 	if not itemPrices then warn("Item price not found") return false end
 
@@ -31,11 +31,11 @@ function module.buy(plr, itemId)
 
 	local multi = priceMultiplier[itemId] or 1	
 
-	local ok = economy.update(plr, "Decrement", itemPrices.economy, multi)
+	local ok = economy.Decrement(plr, itemPrices.economy, multi)
 	if not ok then warn("err in decrement") return false end
 
-	local success = inventory.add(plr, itemData)
-	if not success then warn("err in inventory.add") economy.update(plr, "Increment", itemPrices.economy, multi) return false end
+	local success = inventory.Add(plr, itemData)
+	if not success then warn("err in inventory.add") economy.Increment(plr, itemPrices.economy, multi) return false end
 	
 	return true
 end
