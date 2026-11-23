@@ -9,7 +9,6 @@ local PlayerState = require(src.PlayerState.PlayerStateServer)
 type Currencies = {[string]: number}
 
 local function validate(plr, currencies: Currencies, n: number)
-	n = n or 1
 	assert(n >= 0, "Invalid multiplier")
 
 	for currency, value in currencies do
@@ -29,7 +28,7 @@ local function validate(plr, currencies: Currencies, n: number)
 end
 
 function module.Set(plr, currencies: Currencies, n: number?)
-
+	n = n or 1
 	if not validate(plr, currencies, n) then return false end
 
 	local ops = {}
@@ -45,7 +44,7 @@ function module.Set(plr, currencies: Currencies, n: number?)
 end
 
 function module.Increment(plr, currencies: Currencies, n: number?)
-
+	n = n or 1
 	if not validate(plr, currencies, n) then return false end
 
 	local ops = {}
@@ -62,7 +61,7 @@ function module.Increment(plr, currencies: Currencies, n: number?)
 end
 
 function module.Decrement(plr, currencies: Currencies, n: number?)
-	
+	n = n or 1
 	if not validate(plr, currencies, n) then return false end
 
 	local ops = {}
