@@ -8,7 +8,7 @@ Desarrollo sistemas backend para Roblox con **Luau**. Actualmente trabajo en una
 |---|---|---|
 | **Item** | Datos por objeto, métodos específicos y generación de identidad. | [`Item`](src/ReplicatedStorage/Shared/Systems/Item/) |
 | **Economy** | Operaciones `set`, `increment` y `decrement` sobre monedas del jugador. | [`Economy.luau`](src/ServerStorage/Systems/Economy.luau) |
-| **Inventory** | Alta, eliminación y reducción de cantidad; organiza referencias por clave, tipo y rareza. | [`Inventory.luau`](src/ServerStorage/Systems/Inventory.luau) |
+| **Inventory** | Añadir o Quitar Items, Incrementar o Decrementar Items no "Mutables" o "Acumulables" | [`Inventory.luau`](src/ServerStorage/Systems/Inventory.luau) |
 | **Shop** | Código inicial para consultar precios, cobrar y añadir objetos al inventario. | [`Shop/Item.luau`](src/ServerStorage/Systems/Shop/Item.luau) |
 
 ## Cómo está organizado
