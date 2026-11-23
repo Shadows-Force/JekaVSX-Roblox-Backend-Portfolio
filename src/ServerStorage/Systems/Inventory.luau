@@ -1,68 +1,79 @@
+
 local module = {}
 
 local RS = game:GetService("ReplicatedStorage")
 local src = RS[".cealshell"].src
 local PlayerState = require(src.PlayerState.PlayerStateServer)
 
-type Methods = "SetInDict" | "RemoveFromDict" | "SetPath"
+local function getPaths(item)
+	local key = item.key
 
-local function updateInventory(plr, method: Methods, item, data)
-	local ok, err = pcall(function()
-		PlayerState[method](plr, `inventory.index.{item.key}`, data)
-		PlayerState[method](plr, `inventory.type.{item.type}.{item.key}`, data)
-		PlayerState[method](plr, `inventory.rarity.{item.display.rarity}.{item.key}`, data)
-	end)
-	
-	if not ok then
-		warn(`[Inventory] Error updating inventory: {err}`)
-	end
-	
-	return ok
+	return {
+		index = `inventory.index.{key}`,
+		type = `inventory.type.{item.type}.{key}`,
+		rarity = `inventory.rarity.{item.display.rarity}.{key}`
+	}
 end
 
-local function clean(plr, key)
-	local item = PlayerState.GetPath(plr, `inventory.index.{key}`)
-	if not item then return end
-	updateInventory(plr, "SetPath", item, nil)
+local function update(plr, paths, value)
+	local ops = {}
+
+	for _, path in paths do
+		table.insert(ops, {
+			path = path,
+			value = value
+		})
+	end
+
+	return PlayerState.BatchSetValues(plr, ops)
 end
 
-function module.add(plr, itemData)
-	local path = string.format("inventory.index.%s", itemData.key)
-	
-	if PlayerState.GetPath(plr, path) then
-		if itemData.config.isMutable then
-			warn("Item already exists")
-			return false
-		else
-			PlayerState.Increment(plr, `{path}.amount`, 1)
-			return true
-		end
-	end
-	
-	if not updateInventory(plr, "SetPath", itemData, itemData) then
-		updateInventory(plr, "SetPath", itemData, nil)
+function module.Add(plr, item)
+	local paths = getPaths(item)
+
+	if PlayerState.GetPath(plr, paths.index) then
 		return false
 	end
-	
-	return true
+
+	return update(plr, paths, item)
 end
 
-function module.remove(plr, key)
-	clean(plr, key)
-end
+function module.Remove(plr, item)
+	local paths = getPaths(item)
 
-function module.decrease(plr, key, amount)
-	amount = amount > 0 and amount or 1
-	local path = string.format("inventory.index.%s", key)
-	local itemData = PlayerState.GetPath(plr, path)
-	if not itemData then return end
-	
-	if itemData.amount - amount <= 0 then
-		updateInventory(plr, "SetPath", itemData, nil)
-		return
+	if not PlayerState.GetPath(plr, paths.index) then
+		return false
 	end
-	
-	PlayerState.Decrement(plr, `{path}.amount`, amount)
+
+	return update(plr, paths, nil)
+end
+
+local function validateAmount(plr, item, n)
+	n = n or 1
+	assert(n >= 0, "Invalid amount")
+
+	local path = `inventory.index.{item.key}.amount`
+	local amount = PlayerState.GetPath(plr, path)
+
+	assert(amount ~= nil, "Item not found")
+
+	return path, amount, n
+end
+
+function module.Increment(plr, item, n)
+	local path, _, n = validateAmount(plr, item, n)
+
+	return PlayerState.Increment(plr, path, n)
+end
+
+function module.Decrement(plr, item, n)
+	local path, amount, n = validateAmount(plr, item, n)
+
+	if amount < n then
+		return false
+	end
+
+	return PlayerState.Decrement(plr, path, n)
 end
 
 return module
