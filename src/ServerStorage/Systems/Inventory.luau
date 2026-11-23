@@ -48,7 +48,9 @@ function module.Remove(plr, item)
 	return update(plr, paths, nil)
 end
 
-local function validateAmount(plr, item, n)
+local function validate(plr, item, n)
+	assert(not item.config.isMutable, "Can't update item mutable")
+	
 	n = n or 1
 	assert(n >= 0, "Invalid amount")
 
@@ -61,13 +63,13 @@ local function validateAmount(plr, item, n)
 end
 
 function module.Increment(plr, item, n)
-	local path, _, n = validateAmount(plr, item, n)
+	local path, _, n = validate(plr, item, n)
 
 	return PlayerState.Increment(plr, path, n)
 end
 
 function module.Decrement(plr, item, n)
-	local path, amount, n = validateAmount(plr, item, n)
+	local path, amount, n = validate(plr, item, n)
 
 	if amount < n then
 		return false
